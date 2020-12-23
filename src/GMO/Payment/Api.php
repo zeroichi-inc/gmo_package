@@ -12,6 +12,16 @@ class Api
         $this->apiBaseUrl = $apiBaseUrl;
     }
 
+    public function setParam(string $name, $value)
+    {
+        $this->params[$name] = $value;
+    }
+
+    public function unsetParam(string $name)
+    {
+        unset($this->params[$name]);
+    }
+
     public function request(string $apiMethod)
     {
         $methodUrl = $this->apiBaseUrl . '/' . $apiMethod;
