@@ -48,7 +48,7 @@ class Api
 
         $response = array(
             'status' => $curlinfo['http_code'],
-            'response' => json_decode($curlres),
+            'response' => json_decode($curlres, true),
         );
 
         return $response;
