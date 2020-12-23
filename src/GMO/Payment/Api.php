@@ -24,7 +24,7 @@ class Api
 
     public function request(string $apiMethod)
     {
-        $methodUrl = $this->apiBaseUrl . '/' . $apiMethod;
+        $methodUrl = $this->apiBaseUrl . '/' . $apiMethod . '.json';
 
         $ch = curl_init();
 
