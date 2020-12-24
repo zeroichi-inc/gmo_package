@@ -4,10 +4,10 @@ namespace GMO\Payment;
 
 class Api
 {
-    public const API_METHOD_ENTRY_TRAN = 'EntryTran';
-    public const API_METHOD_EXEC_TRAN = 'ExecTran';
-    public const API_METHOD_ALTER_TRAN = 'AlterTran';
-    public const API_METHOD_SECURE_TRAN = 'SecureTran';
+    public const METHOD_ENTRY_TRAN = 'EntryTran';
+    public const METHOD_EXEC_TRAN = 'ExecTran';
+    public const METHOD_ALTER_TRAN = 'AlterTran';
+    public const METHOD_SECURE_TRAN = 'SecureTran';
 
     protected string $apiBaseUrl;
     protected array $params = array();
