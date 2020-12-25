@@ -9,6 +9,11 @@ class Api
     public const METHOD_ALTER_TRAN = 'AlterTran';
     public const METHOD_SECURE_TRAN = 'SecureTran';
 
+    public const JOBCD_CHECK = 'CHECK';
+    public const JOBCD_CAPTURE = 'CAPTURE';
+    public const JOBCD_AUTH = 'AUTH';
+    public const JOBCD_SAUTH = 'SAUTH';
+
     protected string $apiBaseUrl;
     protected array $params = array();
 
