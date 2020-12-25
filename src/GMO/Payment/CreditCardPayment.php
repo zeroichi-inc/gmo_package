@@ -34,16 +34,21 @@ class CreditCardPayment
         }
     }
 
-    private function setSite(Api $apiObj)
+    private function createApiObject(bool $withShop = true, bool $withSite = false)
     {
-        $apiObj->setParam('siteID', $this->siteID);
-        $apiObj->setParam('sitePass', $this->sitePass);
-    }
+        $api = new Api($this->host);
 
-    private function setShop(Api $apiObj)
-    {
-        $apiObj->setParam('shopID', $this->shopID);
-        $apiObj->setParam('shopPass', $this->shopPass);
+        if ($withShop) {
+            $api->setParam('shopID', $this->shopID);
+            $api->setParam('shopPass', $this->shopPass);
+        }
+
+        if ($withSite) {
+            $api->setParam('siteID', $this->siteID);
+            $api->setParam('sitePass', $this->sitePass);
+        }
+
+        return $api;
     }
 
     private function setOptionalParams(array $optional)
@@ -53,9 +58,8 @@ class CreditCardPayment
 
     public function entryTran(string $orderID, string $jobCd = Api::JOBCD_CAPTURE, int $amount = 0, array $optional)
     {
-        $api = new Api($this->host);
+        $api = $this->createApiObject();
 
-        $this->setShop($api);
         $api->setParam('orderID', $orderID);
         $api->setParam('jobCd', $jobCd);
         if ($jobCd != Api::JOBCD_CHECK) {
