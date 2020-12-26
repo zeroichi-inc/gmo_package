@@ -1,4 +1,6 @@
 {
+    "name": "zeroichi-inc/gmo_package",
+
     "require": {
         "php": ">=7.1.0",
         "ext-curl": "*"
