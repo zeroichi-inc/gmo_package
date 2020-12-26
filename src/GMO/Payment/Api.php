@@ -13,6 +13,11 @@ class Api
     public const JOBCD_CAPTURE = 'CAPTURE';
     public const JOBCD_AUTH = 'AUTH';
     public const JOBCD_SAUTH = 'SAUTH';
+    public const JOBCD_VOID = 'VOID';
+    public const JOBCD_RETURN = 'RETURN';
+    public const JOBCD_RETURNX = 'RETURNX';
+    public const JOBCD_SALES = 'SALES';
+    public const JOBCD_CANCEL = 'CANCEL';
 
     protected string $apiBaseUrl;
     protected array $params = array();
