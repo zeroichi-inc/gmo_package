@@ -85,7 +85,7 @@ class CreditCardPayment
         return $api->request(Api::API_EXEC_TRAN);
     }
 
-    public function alterTran(string $accessID, string $accessPass, string $jobCd = Api::JOBCD_CANCEL, int $amount = 0, int $method = 1)
+    public function alterTran(string $accessID, string $accessPass, string $jobCd, int $amount = 0, int $method = 1)
     {
         $api = $this->createApiObject();
 
