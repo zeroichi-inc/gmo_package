@@ -56,7 +56,7 @@ class CreditCardPayment
         //TODO: Implement this function
     }
 
-    public function entryTran(string $orderID, int $amount = 0, string $jobCd = Api::JOBCD_CAPTURE, array $optional)
+    public function entryTran(string $orderID, int $amount = 0, string $jobCd = Api::JOBCD_CAPTURE, array $optional = [])
     {
         $api = $this->createApiObject();
 
@@ -71,7 +71,7 @@ class CreditCardPayment
         return $api->request(Api::API_ENTRY_TRAN);
     }
 
-    public function execTran(string $accessID, string $accessPass, string $token, int $method = 1, array $optional)
+    public function execTran(string $accessID, string $accessPass, string $token, int $method = 1, array $optional = [])
     {
         $api = $this->createApiObject();
 
