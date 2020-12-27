@@ -71,12 +71,13 @@ class CreditCardPayment
         return $api->request(Api::API_ENTRY_TRAN);
     }
 
-    public function execTran(string $accessID, string $accessPass, string $token, int $method = 1, array $optional = [])
+    public function execTran(string $accessID, string $accessPass, string $orderID, string $token, int $method = 1, array $optional = [])
     {
         $api = $this->createApiObject();
 
         $api->setParam('accessID', $accessID);
         $api->setParam('accessPass', $accessPass);
+        $api->setParam('orderID', $orderID);
         $api->setParam('token', $token);
         $api->setParam('method', $method);
 
