@@ -51,7 +51,7 @@ class CreditCardPayment
         return $api;
     }
 
-    private function setOptionalParams(array $optional)
+    private function setParamArray(array $optional)
     {
         //TODO: Implement this function
     }
@@ -66,7 +66,7 @@ class CreditCardPayment
             $api->setParam('amount', $amount);
         }
 
-        $this->setOptionalParams($optional);
+        $this->setParamArray($optional);
 
         return $api->request(Api::API_ENTRY_TRAN);
     }
@@ -80,7 +80,7 @@ class CreditCardPayment
         $api->setParam('token', $token);
         $api->setParam('method', $method)
 
-        $this->setOptionalParams($optional)
+        $this->setParamArray($optional)
 
         return $api->request(Api::API_EXEC_TRAN);
     }
