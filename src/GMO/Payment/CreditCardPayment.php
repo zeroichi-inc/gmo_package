@@ -78,9 +78,9 @@ class CreditCardPayment
         $api->setParam('accessID', $accessID);
         $api->setParam('accessPass', $accessPass);
         $api->setParam('token', $token);
-        $api->setParam('method', $method)
+        $api->setParam('method', $method);
 
-        $this->setParamArray($optional)
+        $this->setParamArray($optional);
 
         return $api->request(Api::API_EXEC_TRAN);
     }
