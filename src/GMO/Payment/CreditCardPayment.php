@@ -51,11 +51,6 @@ class CreditCardPayment
         return $api;
     }
 
-    private function setParamArray(array $optional)
-    {
-        //TODO: Implement this function
-    }
-
     public function entryTran(string $orderID, int $amount = 0, string $jobCd = Api::JOBCD_CAPTURE, array $optional = [])
     {
         $api = $this->createApiObject();
@@ -66,7 +61,7 @@ class CreditCardPayment
             $api->setParam('amount', $amount);
         }
 
-        $this->setParamArray($optional);
+        $api->setParamArray($optional);
 
         return $api->request(Api::API_ENTRY_TRAN);
     }
@@ -81,7 +76,7 @@ class CreditCardPayment
         $api->setParam('token', $token);
         $api->setParam('method', $method);
 
-        $this->setParamArray($optional);
+        $api->setParamArray($optional);
 
         return $api->request(Api::API_EXEC_TRAN);
     }

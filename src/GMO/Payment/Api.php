@@ -33,6 +33,13 @@ class Api
         $this->params[$name] = $value;
     }
 
+    public function setParamArray(array $params)
+    {
+        foreach ($params as $key => $value) {
+            $this->setParam($key, $value);
+        }
+    }
+
     public function unsetParam(string $name)
     {
         unset($this->params[$name]);
