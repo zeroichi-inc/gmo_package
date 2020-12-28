@@ -88,8 +88,11 @@ class CreditCardPayment
         $api->setParam('accessID', $accessID);
         $api->setParam('accessPass', $accessPass);
         $api->setParam('jobCd', $jobCd);
-        $api->setParam('amount', $amount);
-        $api->setParam('method', $method);
+
+        if (!in_array($jobCd, array(Api::JOBCD_VOID, Api::JOBCD_RETURN, Api::JOBCD_RETURNX, Api::JOBCD_CANCEL))) {
+            $api->setParam('amount', $amount);
+            $api->setParam('method', $method);
+        }
 
         return $api->request(Api::API_ALTER_TRAN);
     }
