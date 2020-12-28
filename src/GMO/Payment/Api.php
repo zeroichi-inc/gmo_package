@@ -6,8 +6,9 @@ class Api
 {
     public const API_ENTRY_TRAN = 'EntryTran';
     public const API_EXEC_TRAN = 'ExecTran';
-    public const API_ALTER_TRAN = 'AlterTran';
     public const API_SECURE_TRAN = 'SecureTran';
+    public const API_ALTER_TRAN = 'AlterTran';
+    public const API_SEARCH_TRADE = 'SearchTrade';
 
     public const JOBCD_CHECK = 'CHECK';
     public const JOBCD_CAPTURE = 'CAPTURE';

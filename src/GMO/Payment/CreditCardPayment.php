@@ -98,4 +98,13 @@ class CreditCardPayment
 
         return $api->request(Api::API_ALTER_TRAN);
     }
+
+    public function searchTrade(string $orderID)
+    {
+        $api = $this->createApiObject();
+
+        $api->setParam('orderID', $orderID);
+
+        return $api->request(Api::API_SEARCH_TRADE);
+    }
 }
