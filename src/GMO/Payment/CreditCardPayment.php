@@ -105,4 +105,46 @@ class CreditCardPayment
 
         return $api->request(Api::API_SEARCH_TRADE);
     }
+
+    public function saveMember(string $memberID, string $memberName = null)
+    {
+        $api = $this->createApiObject(false, true);
+
+        $api->setParam('memberID', $memberID);
+        if ($memberName) {
+            $api->setParam('memberName', $memberName);
+        }
+
+        return $api->request(Api::API_SAVE_MEMBER);
+    }
+
+    public function updateMember(string $memberID, string $memberName = null)
+    {
+        $api = $this->createApiObject(false, true);
+
+        $api->setParam('memberID', $memberID);
+        if ($memberName) {
+            $api->setParam('memberName', $memberName);
+        }
+
+        return $api->request(Api::API_UPDATE_MEMBER);
+    }
+
+    public function searchMember(string $memberID)
+    {
+        $api = $this->createApiObject(false, true);
+
+        $api->setParam('memberID', $memberID);
+
+        return $api->request(Api::API_SEARCH_MEMBER);
+    }
+
+    public function deleteMember(string $memberID)
+    {
+        $api = $this->createApiObject(false, true);
+
+        $api->setParam('memberID', $memberID);
+
+        return $api->request(Api::API_DELETE_MEMBER);
+    }
 }
