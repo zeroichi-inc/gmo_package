@@ -9,6 +9,15 @@ class Api
     public const API_SECURE_TRAN = 'SecureTran';
     public const API_ALTER_TRAN = 'AlterTran';
     public const API_SEARCH_TRADE = 'SearchTrade';
+    public const API_SAVE_MEMBER = 'SaveMember';
+    public const API_UPDATE_MEMBER = 'UpdateMember';
+    public const API_SEARCH_MEMBER = 'SearchMember';
+    public const API_DELETE_MEMBER = 'DeleteMember';
+    public const API_SAVE_CARD = 'SaveCard';
+    public const API_TRADED_CARD = 'TradedCard';
+    public const API_SEARCH_CARD = 'SearchCard';
+    public const API_SEARCH_CARD_DETAIL = 'SearchCardDetail';
+    public const API_DELETE_CARD = 'DeleteCard';
 
     public const JOBCD_CHECK = 'CHECK';
     public const JOBCD_CAPTURE = 'CAPTURE';
