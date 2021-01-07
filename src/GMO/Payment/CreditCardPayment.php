@@ -147,4 +147,55 @@ class CreditCardPayment
 
         return $api->request(Api::API_DELETE_MEMBER);
     }
+
+    public function saveCard(string $memberID, string $token = '', array $optional)
+    {
+        $api = $this->createApiObject(false, true);
+
+        $api->setParam('memberID', $memberID);
+        $api->setParam('token', $token);
+        $api->setParamArray($optional);
+
+        return $api->request(Api::API_SAVE_CARD);
+    }
+
+    public function tradedCard(string $orderID, string $memberID)
+    {
+        $api = $this->createApiObject(true, true);
+
+        $api->setParam('orderID', $orderID);
+        $api->setParam('memberID', $memberID);
+
+        return $api->request(Api::API_TRADED_CARD);
+    }
+
+    public function searchCard(string $memberID)
+    {
+        $api = $this->createApiObject(false, true);
+
+        $api->setParam('memberID', $memberID);
+
+        return $api->request(Api::API_SEARCH_CARD);
+    }
+
+    public function searchCardDetail(array $params)
+    {
+        $api = $this->createApiObject(
+            !array_key_exists('memberID') || array_key_exists('searchType', $params),
+            array_key_exists('memberID', $params)
+        );
+
+        $api->setParamArray($params);
+
+        return $api->request(Api::API_SEARCH_CARD_DETAIL);
+    }
+
+    public function deleteCard(string $memberID, string $cardSeq) {
+        $api = $this->createApiObject(false, true);
+
+        $api->setParam('memberID', $memberID);
+        $api->setParam('cardSeq', $cardSeq);
+
+        return $api->request(Api::API_DELETE_CARD);
+    }
 }
