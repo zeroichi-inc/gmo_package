@@ -148,7 +148,7 @@ class CreditCardPayment
         return $api->request(Api::API_DELETE_MEMBER);
     }
 
-    public function saveCard(string $memberID, string $token = '', array $optional)
+    public function saveCard(string $memberID, string $token = '', array $optional = [])
     {
         $api = $this->createApiObject(false, true);
 
