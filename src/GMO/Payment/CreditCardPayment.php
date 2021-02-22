@@ -70,7 +70,7 @@ class CreditCardPayment
     {
         $useSavedCard = array_key_exists('memberID', $auth) && array_key_exists('cardSeq', $auth);
 
-        $api = $this->createApiObject($withSite = $useSavedCard);
+        $api = $this->createApiObject(true, $useSavedCard);
 
         $api->setParam('accessID', $accessID);
         $api->setParam('accessPass', $accessPass);
