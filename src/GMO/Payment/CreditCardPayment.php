@@ -80,7 +80,7 @@ class CreditCardPayment
             $api->setParam('memberID', $auth['memberID']);
             $api->setParam('cardSeq', $auth['cardSeq']);
         } else {
-            $api->setParamArray('token', array_key_exists('token', $auth)? $auth['token'] : '');
+            $api->setParam('token', array_key_exists('token', $auth)? $auth['token'] : '');
         }
 
         $api->setParamArray($optional);
