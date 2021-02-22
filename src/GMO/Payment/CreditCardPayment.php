@@ -66,15 +66,22 @@ class CreditCardPayment
         return $api->request(Api::API_ENTRY_TRAN);
     }
 
-    public function execTran(string $accessID, string $accessPass, string $orderID, string $token, int $method = 1, array $optional = [])
+    public function execTran(string $accessID, string $accessPass, string $orderID, array $auth = [], int $method = 1, array $optional = [])
     {
+        $useSavedCard = array_key_exists('memberID', $auth) && array_key_exists('cardSeq', $auth);
+
         $api = $this->createApiObject();
 
         $api->setParam('accessID', $accessID);
         $api->setParam('accessPass', $accessPass);
         $api->setParam('orderID', $orderID);
-        $api->setParam('token', $token);
         $api->setParam('method', $method);
+        if ($useSavedCard) {
+            $api->setParam('memberID', $auth['memberID']);
+            $api->setParam('cardSeq', $auth['cardSeq']);
+        } else {
+            $api->setParamArray('token', array_key_exists('token', $auth)? $auth['token'] : '');
+        }
 
         $api->setParamArray($optional);
 
