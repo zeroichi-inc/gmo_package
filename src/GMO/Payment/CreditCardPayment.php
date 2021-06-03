@@ -88,6 +88,16 @@ class CreditCardPayment
         return $api->request(Api::API_EXEC_TRAN);
     }
 
+    public function secureTran2(string $accessID, string $accessPass)
+    {
+        $api = $this->createApiObject(false, false);
+
+        $api->setParam('accessID', $accessID);
+        $api->setParam('accessPass', $accessPass);
+
+        return $api->request(Api::API_SECURE_TRAN2);
+    }
+
     public function alterTran(string $accessID, string $accessPass, string $jobCd, int $amount = 0, int $method = 1)
     {
         $api = $this->createApiObject();

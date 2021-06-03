@@ -7,6 +7,7 @@ class Api
     public const API_ENTRY_TRAN = 'EntryTran';
     public const API_EXEC_TRAN = 'ExecTran';
     public const API_SECURE_TRAN = 'SecureTran';
+    public const API_SECURE_TRAN2 = 'SecureTran2';
     public const API_ALTER_TRAN = 'AlterTran';
     public const API_SEARCH_TRADE = 'SearchTrade';
     public const API_SAVE_MEMBER = 'SaveMember';
