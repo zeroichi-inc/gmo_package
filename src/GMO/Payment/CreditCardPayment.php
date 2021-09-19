@@ -114,6 +114,20 @@ class CreditCardPayment
         return $api->request(Api::API_ALTER_TRAN);
     }
 
+    public function changeTran(string $accessID, string $accessPass, string $jobCd, int $amount, array $optional = [])
+    {
+        $api = $this->createApiObject();
+
+        $api->setParam('accessID', $accessID);
+        $api->setParam('accessPass', $accessPass);
+        $api->setParam('jobCd', $jobCd);
+        $api->setParam('amount', $amount);
+
+        $api->setParamArray($optional);
+
+        return $api->request(Api::API_CHANGE_TRAN);
+    }
+
     public function searchTrade(string $orderID)
     {
         $api = $this->createApiObject();
