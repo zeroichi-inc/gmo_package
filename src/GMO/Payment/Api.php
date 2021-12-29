@@ -127,7 +127,7 @@ class Api
         }
 
         $response = array(
-            'status' => $curlinfo['http_code'],
+            'status' => $this->getIDPassResponseCode($curlres),
             'response' => $this->convertIDPassToJson($curlres),
         );
 
@@ -179,5 +179,19 @@ class Api
         }
 
         return $res;
+    }
+
+    protected function getIDPassResponseCode(string $idPassRes)
+    {
+        $resCode = 200;
+        parse_str($idPassRes, $parsedIdPassRes);
+
+        if (array_key_exists('ErrCode', $parsedIdPassRes)) {
+            // The circumstances in which each error happens are not clear.
+            // Other response codes may be implemented later.
+            $resCode = 400;
+        }
+
+        return $resCode;
     }
 }
