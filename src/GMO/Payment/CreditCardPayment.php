@@ -16,9 +16,12 @@ class CreditCardPayment
 
     private array $apiParams = [];
 
-    public function __construct(string $host, array $credentials)
+    private bool $forceOldApi;
+
+    public function __construct(string $host, array $credentials, bool $forceOldApi = false)
     {
         $this->host = $host;
+        $this->forceOldApi = $forceOldApi;
 
         if (array_key_exists('siteID', $credentials)) {
             $this->siteID = $credentials['siteID'];
@@ -36,7 +39,7 @@ class CreditCardPayment
 
     private function createApiObject(bool $withShop = true, bool $withSite = false)
     {
-        $api = new Api($this->host);
+        $api = new Api($this->host, $this->forceOldApi? Api::API_IDPASS: Api::API_JSON);
 
         if ($withShop) {
             $api->setParam('shopID', $this->shopID);
