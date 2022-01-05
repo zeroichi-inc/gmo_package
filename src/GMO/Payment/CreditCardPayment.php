@@ -66,7 +66,7 @@ class CreditCardPayment
 
         $api->setParamArray($optional);
 
-        return $api->request(Api::API_ENTRY_TRAN);
+        return $api->request(Api::METHOD_ENTRY_TRAN);
     }
 
     public function execTran(string $accessID, string $accessPass, string $orderID, array $auth = [], int $method = 1, array $optional = [])
@@ -88,7 +88,7 @@ class CreditCardPayment
 
         $api->setParamArray($optional);
 
-        return $api->request(Api::API_EXEC_TRAN);
+        return $api->request(Api::METHOD_EXEC_TRAN);
     }
 
     public function secureTran2(string $accessID, string $accessPass)
@@ -98,7 +98,7 @@ class CreditCardPayment
         $api->setParam('accessID', $accessID);
         $api->setParam('accessPass', $accessPass);
 
-        return $api->request(Api::API_SECURE_TRAN2);
+        return $api->request(Api::METHOD_SECURE_TRAN2);
     }
 
     public function alterTran(string $accessID, string $accessPass, string $jobCd, int $amount = 0, int $method = 1)
@@ -114,7 +114,7 @@ class CreditCardPayment
             $api->setParam('method', $method);
         }
 
-        return $api->request(Api::API_ALTER_TRAN);
+        return $api->request(Api::METHOD_ALTER_TRAN);
     }
 
     public function changeTran(string $accessID, string $accessPass, string $jobCd, int $amount, array $optional = [])
@@ -128,7 +128,7 @@ class CreditCardPayment
 
         $api->setParamArray($optional);
 
-        return $api->request(Api::API_CHANGE_TRAN);
+        return $api->request(Api::METHOD_CHANGE_TRAN);
     }
 
     public function searchTrade(string $orderID)
@@ -137,7 +137,7 @@ class CreditCardPayment
 
         $api->setParam('orderID', $orderID);
 
-        return $api->request(Api::API_SEARCH_TRADE);
+        return $api->request(Api::METHOD_SEARCH_TRADE);
     }
 
     public function saveMember(string $memberID, string $memberName = null)
@@ -149,7 +149,7 @@ class CreditCardPayment
             $api->setParam('memberName', $memberName);
         }
 
-        return $api->request(Api::API_SAVE_MEMBER);
+        return $api->request(Api::METHOD_SAVE_MEMBER);
     }
 
     public function updateMember(string $memberID, string $memberName = null)
@@ -161,7 +161,7 @@ class CreditCardPayment
             $api->setParam('memberName', $memberName);
         }
 
-        return $api->request(Api::API_UPDATE_MEMBER);
+        return $api->request(Api::METHOD_UPDATE_MEMBER);
     }
 
     public function searchMember(string $memberID)
@@ -170,7 +170,7 @@ class CreditCardPayment
 
         $api->setParam('memberID', $memberID);
 
-        return $api->request(Api::API_SEARCH_MEMBER);
+        return $api->request(Api::METHOD_SEARCH_MEMBER);
     }
 
     public function deleteMember(string $memberID)
@@ -179,7 +179,7 @@ class CreditCardPayment
 
         $api->setParam('memberID', $memberID);
 
-        return $api->request(Api::API_DELETE_MEMBER);
+        return $api->request(Api::METHOD_DELETE_MEMBER);
     }
 
     public function saveCard(string $memberID, string $token = '', array $optional = [])
@@ -190,7 +190,7 @@ class CreditCardPayment
         $api->setParam('token', $token);
         $api->setParamArray($optional);
 
-        return $api->request(Api::API_SAVE_CARD);
+        return $api->request(Api::METHOD_SAVE_CARD);
     }
 
     public function tradedCard(string $orderID, string $memberID)
@@ -200,7 +200,7 @@ class CreditCardPayment
         $api->setParam('orderID', $orderID);
         $api->setParam('memberID', $memberID);
 
-        return $api->request(Api::API_TRADED_CARD);
+        return $api->request(Api::METHOD_TRADED_CARD);
     }
 
     public function searchCard(string $memberID)
@@ -209,7 +209,7 @@ class CreditCardPayment
 
         $api->setParam('memberID', $memberID);
 
-        return $api->request(Api::API_SEARCH_CARD);
+        return $api->request(Api::METHOD_SEARCH_CARD);
     }
 
     public function searchCardDetail(array $params)
@@ -221,7 +221,7 @@ class CreditCardPayment
 
         $api->setParamArray($params);
 
-        return $api->request(Api::API_SEARCH_CARD_DETAIL);
+        return $api->request(Api::METHOD_SEARCH_CARD_DETAIL);
     }
 
     public function deleteCard(string $memberID, string $cardSeq) {
@@ -230,6 +230,6 @@ class CreditCardPayment
         $api->setParam('memberID', $memberID);
         $api->setParam('cardSeq', $cardSeq);
 
-        return $api->request(Api::API_DELETE_CARD);
+        return $api->request(Api::METHOD_DELETE_CARD);
     }
 }

@@ -4,22 +4,22 @@ namespace GMO\Payment;
 
 class Api
 {
-    public const API_ENTRY_TRAN = 'EntryTran';
-    public const API_EXEC_TRAN = 'ExecTran';
-    public const API_SECURE_TRAN = 'SecureTran';
-    public const API_SECURE_TRAN2 = 'SecureTran2';
-    public const API_ALTER_TRAN = 'AlterTran';
-    public const API_CHANGE_TRAN = 'ChangeTran';
-    public const API_SEARCH_TRADE = 'SearchTrade';
-    public const API_SAVE_MEMBER = 'SaveMember';
-    public const API_UPDATE_MEMBER = 'UpdateMember';
-    public const API_SEARCH_MEMBER = 'SearchMember';
-    public const API_DELETE_MEMBER = 'DeleteMember';
-    public const API_SAVE_CARD = 'SaveCard';
-    public const API_TRADED_CARD = 'TradedCard';
-    public const API_SEARCH_CARD = 'SearchCard';
-    public const API_SEARCH_CARD_DETAIL = 'SearchCardDetail';
-    public const API_DELETE_CARD = 'DeleteCard';
+    public const METHOD_ENTRY_TRAN = 'EntryTran';
+    public const METHOD_EXEC_TRAN = 'ExecTran';
+    public const METHOD_SECURE_TRAN = 'SecureTran';
+    public const METHOD_SECURE_TRAN2 = 'SecureTran2';
+    public const METHOD_ALTER_TRAN = 'AlterTran';
+    public const METHOD_CHANGE_TRAN = 'ChangeTran';
+    public const METHOD_SEARCH_TRADE = 'SearchTrade';
+    public const METHOD_SAVE_MEMBER = 'SaveMember';
+    public const METHOD_UPDATE_MEMBER = 'UpdateMember';
+    public const METHOD_SEARCH_MEMBER = 'SearchMember';
+    public const METHOD_DELETE_MEMBER = 'DeleteMember';
+    public const METHOD_SAVE_CARD = 'SaveCard';
+    public const METHOD_TRADED_CARD = 'TradedCard';
+    public const METHOD_SEARCH_CARD = 'SearchCard';
+    public const METHOD_SEARCH_CARD_DETAIL = 'SearchCardDetail';
+    public const METHOD_DELETE_CARD = 'DeleteCard';
 
     public const JOBCD_CHECK = 'CHECK';
     public const JOBCD_CAPTURE = 'CAPTURE';
