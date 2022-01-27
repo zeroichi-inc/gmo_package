@@ -237,7 +237,7 @@ class CreditCardPayment
 
     public function registerRecurringCredit(string $recurringID, int $amount, string $memberID, array $chargeDate = [])
     {
-        $api = $this->createApiObject(true, true);
+        $api = $this->createApiObject(true, true, true);
 
         $api->setParam('recurringID', $recurringID);
         $api->setParam('amount', $amount);
