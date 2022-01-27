@@ -37,9 +37,9 @@ class CreditCardPayment
         }
     }
 
-    private function createApiObject(bool $withShop = true, bool $withSite = false)
+    private function createApiObject(bool $withShop = true, bool $withSite = false, bool $forceOldApi = false)
     {
-        $api = new Api($this->host, $this->forceOldApi? Api::API_IDPASS: Api::API_JSON);
+        $api = new Api($this->host, ($this->forceOldApi || $forceOldApi)? Api::API_IDPASS: Api::API_JSON);
 
         if ($withShop) {
             $api->setParam('shopID', $this->shopID);
