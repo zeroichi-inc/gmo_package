@@ -20,6 +20,14 @@ class Api
     public const METHOD_SEARCH_CARD = 'SearchCard';
     public const METHOD_SEARCH_CARD_DETAIL = 'SearchCardDetail';
     public const METHOD_DELETE_CARD = 'DeleteCard';
+    // Recurring payments
+    public const METHOD_REGISTER_RECURRING_CREDIT = 'RegisterRecurringCredit';
+    public const METHOD_REGISTER_RECURRING_ACCOUNT_TRANS = 'RegisterRecurringAccountTrans';
+    public const METHOD_UNREGISTER_RECURRING = 'UnregisterRecurring';
+    public const METHOD_CHANGE_RECURRING = 'ChangeRecurring';
+    public const METHOD_SEARCH_RECURRING = 'SearchRecurring';
+    public const METHOD_SEARCH_RECURRING_RESULT = 'SearchRecurringResult';
+
 
     public const JOBCD_CHECK = 'CHECK';
     public const JOBCD_CAPTURE = 'CAPTURE';
