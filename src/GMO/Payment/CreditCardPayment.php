@@ -248,4 +248,46 @@ class CreditCardPayment
 
         return $api->request(Api::METHOD_REGISTER_RECURRING_CREDIT);
     }
+
+    public function registerRecurringAccountTrans()
+    {
+        throw Exception('Unimplemented');
+    }
+
+    public function unregisterRecurring(string $recurringID)
+    {
+        $api = $this->createApiObject(true, false, true);
+
+        $api->setParam('recurringID', $recurringID);
+
+        return $api->request(Api::METHOD_UNREGISTER_RECURRING);
+    }
+
+    public function changeRecurring(string $recurringID, int $amount)
+    {
+        $api = $this->createApiObject(true, false, true);
+
+        $api->setParam('recurringID', $recurringID);
+        $api->setParam('amount', $amount);
+
+        return $api->request(Api::METHOD_UNREGISTER_RECURRING);
+    }
+
+    public function searchRecurring(string $recurringID)
+    {
+        $api = $this->createApiObject(true, false, true);
+
+        $api->setParam('recurringID', $recurringID);
+
+        return $api->request(Api::METHOD_SEARCH_RECURRING);
+    }
+
+    public function searchRecurringResult(string $recurringID)
+    {
+        $api = $this->createApiObject(true, false, true);
+
+        $api->setParam('recurringID', $recurringID);
+
+        return $api->request(Api::METHOD_SEARCH_RECURRING_RESULT);
+    }
 }
