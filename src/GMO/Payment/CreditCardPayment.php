@@ -232,4 +232,20 @@ class CreditCardPayment
 
         return $api->request(Api::METHOD_DELETE_CARD);
     }
+
+    // Recurrent payment methods
+
+    public function registerRecurringCredit(string $recurringID, int $amount, string $memberID, array $chargeDate = [])
+    {
+        $api = $this->createApiObject(true, true);
+
+        $api->setParam('recurringID', $recurringID);
+        $api->setParam('amount', $amount);
+        $api->setParam('memberID', $memberID);
+        $api->setParam('registType', 1);
+
+        $api->setParam('chargeDay', $chargeDate['day']);
+
+        return $api->request(Api::METHOD_REGISTER_RECURRING_CREDIT);
+    }
 }
