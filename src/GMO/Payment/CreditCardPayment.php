@@ -298,6 +298,6 @@ class CreditCardPayment
         $api->setParam('method', $method);
         $api->setParam('chargeDate', $chargeDate);
 
-        return $api->request(Api::METHOD_SEARCH_RECURRING_RESULT);
+        return $api->request(Api::METHOD_SEARCH_RECURRING_RESULT, true);
     }
 }
