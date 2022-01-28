@@ -70,16 +70,16 @@ class Api
         unset($this->params[$name]);
     }
 
-    public function request(string $apiMethod)
+    public function request(string $apiMethod, bool $rawResponse = false)
     {
         if ($this->apiType == self::API_JSON) {
-            return $this->requestJson($apiMethod);
+            return $this->requestJson($apiMethod, $rawResponse);
         } else if ($this->apiType == self::API_IDPASS) {
-            return $this->requestIdpass($apiMethod);
+            return $this->requestIdpass($apiMethod, $rawResponse);
         }
     }
 
-    public function requestJson(string $apiMethod)
+    public function requestJson(string $apiMethod, bool $rawResponse)
     {
         $methodUrl = $this->apiBaseUrl . '/' . $apiMethod . '.json';
 
@@ -105,13 +105,13 @@ class Api
 
         $response = array(
             'status' => $curlinfo['http_code'],
-            'response' => json_decode($curlres, true),
+            'response' => $rawResponse? $curlres: json_decode($curlres, true),
         );
 
         return $response;
     }
 
-    public function requestIdpass(string $apiMethod)
+    public function requestIdpass(string $apiMethod, bool $rawResponse)
     {
         $methodUrl = $this->apiBaseUrl . '/' . $apiMethod . '.idPass';
 
@@ -135,9 +135,12 @@ class Api
             return NULL;
         }
 
+        // Convert the response to utf-8
+        $curlres = mb_convert_encoding($curlres, 'UTF-8', 'SJIS');
+
         $response = array(
             'status' => $this->getIDPassResponseCode($curlres),
-            'response' => $this->convertIDPassToJson($curlres),
+            'response' => $rawResponse? $curlres: $this->convertIDPassToJson($curlres),
         );
 
         return $response;
@@ -160,8 +163,6 @@ class Api
     {
         $res = array();
 
-        // Convert the response to utf-8
-        $idPassRes = mb_convert_encoding($idPassRes, 'UTF-8', 'SJIS');
         parse_str($idPassRes, $parsedIdPassRes);
 
         // Change keys casing
