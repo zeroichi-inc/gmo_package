@@ -290,4 +290,14 @@ class CreditCardPayment
 
         return $api->request(Api::METHOD_SEARCH_RECURRING_RESULT);
     }
+
+    public function searchRecurringResultFile(string $method, string $chargeDate)
+    {
+        $api = $this->createApiObject(true, false, true);
+
+        $api->setParam('method', $method);
+        $api->setParam('chargeDate', $chargeDate);
+
+        return $api->request(Api::METHOD_SEARCH_RECURRING_RESULT);
+    }
 }

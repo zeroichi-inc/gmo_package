@@ -27,6 +27,7 @@ class Api
     public const METHOD_CHANGE_RECURRING = 'ChangeRecurring';
     public const METHOD_SEARCH_RECURRING = 'SearchRecurring';
     public const METHOD_SEARCH_RECURRING_RESULT = 'SearchRecurringResult';
+    public const METHOD_SEARCH_RECURRING_RESULT_FILE = 'SearchRecurringResultFile';
 
 
     public const JOBCD_CHECK = 'CHECK';
