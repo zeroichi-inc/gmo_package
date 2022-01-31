@@ -165,27 +165,49 @@ class Api
 
         parse_str($idPassRes, $parsedIdPassRes);
 
-        // Change keys casing
+        $isListOfArrays = true;
+        $prevSize = NULL;
+
         foreach ($parsedIdPassRes as $key => $value) {
+            // Match JSON api's casing
             $key[0] = strtolower($key[0]);
 
-            if (strpos($value, '|') !== false) {
-                $values = explode('|', $value);
+            $subvalues = explode('|', $value);
 
-                foreach($values as $index => $val) {
-                    if (is_string($val) && strlen($val) == 0) {
-                        $val = NULL;
-                    }
-
-                    $res[$index][$key] = $val;
+            // Determine if the response is a list of arrays
+            // All items have to be the same size, or in other
+            // words, the first item has to be the same size as the
+            // following ones
+            if ($isListOfArrays) {
+                if (is_null($prevSize)) {
+                    $prevSize = sizeof($subvalues);
+                } else if ($prevSize != sizeof($subvalues)) {
+                    $isListOfArrays = false;
                 }
-            } else {
-                if (is_string($value) && strlen($value) == 0) {
-                    $value = NULL;
-                }
-
-                $res[$key] = $value;
             }
+
+            // Set correct value for null properties
+            foreach ($subvalues as $index => $subvalue) {
+                if (strlen($subvalue) <= 0) {
+                    $subvalues[$index] = NULL;
+                }
+            }
+
+            $res[$key] = sizeof($subvalues) > 1? $subvalues: (sizeof($subvalues) == 1? $subvalues[0]: NULL);
+        }
+
+        if ($isListOfArrays && $prevSize > 1) {
+            $tmpRes = array();
+            for ($i = 0; $i < $prevSize; $i++) {
+                $item = array();
+                foreach ($res as $key => $value) {
+                    $item[$key] = $value[$i];
+                }
+
+                $tmpRes[] = $item;
+            }
+
+            $res = $tmpRes;
         }
 
         return $res;
