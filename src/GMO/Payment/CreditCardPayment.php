@@ -18,6 +18,24 @@ class CreditCardPayment
 
     private bool $forceOldApi;
 
+    private const RECURRENT_RESULTS_FILE_HEADER_CREDIT = [
+        'shopID',
+        'recurringID',
+        'orderID',
+        'chargeDate',
+        'status',
+        'amount',
+        'tax',
+        'nextChargeDate',
+        'accessID',
+        'accessPass',
+        'forward',
+        'approvalNo',
+        'errCode',
+        'errInfo',
+        'processDate'
+    ];
+
     public function __construct(string $host, array $credentials, bool $forceOldApi = false)
     {
         $this->host = $host;
@@ -291,13 +309,31 @@ class CreditCardPayment
         return $api->request(Api::METHOD_SEARCH_RECURRING_RESULT);
     }
 
-    public function searchRecurringResultFile(string $method, string $chargeDate)
+    public function searchRecurringResultFile(string $method, string $chargeDate, bool $convertToArray = false)
     {
         $api = $this->createApiObject(true, false, true);
 
         $api->setParam('method', $method);
         $api->setParam('chargeDate', $chargeDate);
 
-        return $api->request(Api::METHOD_SEARCH_RECURRING_RESULT_FILE, true);
+        $res = $api->request(Api::METHOD_SEARCH_RECURRING_RESULT_FILE, true);
+
+        if ($convertToArray) {
+            $res['response'] = $this->convertRecurringResultFileToArray($res['response'], $method);
+        }
+
+        return $res;
+    }
+
+    private function convertRecurringResultFileToArray(string $csvData, string $method)
+    {
+        $entries = preg_split("/\r\n/", $csvData);
+        $header = self::RECURRENT_RESULTS_FILE_HEADER_CREDIT;
+
+        array_walk($entries, function (&$item) use ($header) {
+            $item = array_combine($header, str_getcsv($item));
+        });
+
+        return $entries;
     }
 }
