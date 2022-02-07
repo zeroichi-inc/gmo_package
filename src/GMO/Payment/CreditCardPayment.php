@@ -253,16 +253,40 @@ class CreditCardPayment
 
     // Recurrent payment methods
 
-    public function registerRecurringCredit(string $recurringID, int $amount, string $memberID, array $chargeDate = [])
+    public function registerRecurringCredit(string $recurringID, int $amount, array $registInfo, array $chargeDate, array $optional = [])
     {
-        $api = $this->createApiObject(true, true, true);
+        $api = $this->createApiObject(true, array_key_exists('memberID', $registInfo), true);
 
         $api->setParam('recurringID', $recurringID);
         $api->setParam('amount', $amount);
-        $api->setParam('memberID', $memberID);
-        $api->setParam('registType', 1);
+
+        if (array_key_exists('memberID', $registInfo)) {
+            $api->setParam('registType', 1);
+            $api->setParam('memberID', $registInfo['memberID']);
+        } else if (array_key_exists('cardNo', $registInfo)) {
+            $api->setParam('registType', 2);
+            $api->setParam('cardNo', $registInfo['cardNo']);
+            $api->setParam('expire', $registInfo['expire']);
+        } else if (array_key_exists('srcOrderID', $registInfo)) {
+            $api->setParam('registType', 3);
+            $api->setParam('srcOrderID', $registInfo['srcOrderID']);
+        } else if (array_key_exists('token', $registInfo)) {
+            $api->setParam('registType', 4);
+            $api->setParam('token', $registInfo['token']);
+        }
 
         $api->setParam('chargeDay', $chargeDate['day']);
+        if (array_key_exists('month', $chargeDate)) {
+            $api->setParam('chargeMonth', $chargeDate['month']);
+        }
+        if (array_key_exists('start', $chargeDate)) {
+            $api->setParam('chargeStartDate', $chargeDate['start']);
+        }
+        if (array_key_exists('stop', $chargeDate)) {
+            $api->setParam('chargeStopDate', $chargeDate['stop']);
+        }
+
+        $api->setParamArray($optional);
 
         return $api->request(Api::METHOD_REGISTER_RECURRING_CREDIT);
     }
