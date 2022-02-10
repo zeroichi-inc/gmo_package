@@ -221,11 +221,13 @@ class CreditCardPayment
         return $api->request(Api::METHOD_TRADED_CARD);
     }
 
-    public function searchCard(string $memberID)
+    public function searchCard(string $memberID, array $optional = [])
     {
         $api = $this->createApiObject(false, true);
 
         $api->setParam('memberID', $memberID);
+
+        $api->setParamArray($optional);
 
         return $api->request(Api::METHOD_SEARCH_CARD);
     }
