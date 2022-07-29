@@ -6,6 +6,9 @@ use GMO\Payment\Api;
 
 class PostPayment
 {
+    private const METHOD_ENTRY_TRAN_POSTPAY = 'EntryTranPostpay';
+
+
     private string $host;
 
     private string $siteID = "";
@@ -52,5 +55,16 @@ class PostPayment
         }
 
         return $api;
+    }
+
+    public function entryTranPostpay(string $orderID, int $amount, int $tax = null)
+    {
+        $api = $this->createApiObject();
+
+        $api->setParam('orderID', $orderID);
+        $api->setParam('amount', $amount);
+        if (!is_null($tax)) $api->setParam('tax', $jobCd);
+
+        return $api->request(self::METHOD_ENTRY_TRAN_POSTPAY);
     }
 }
