@@ -159,6 +159,23 @@ class Api
         return mb_convert_encoding(http_build_query($camelCaseParams), 'SJIS');
     }
 
+    protected convertArrayToXML(string $name, array $data)
+    {
+        $itemQueue = [];
+
+        foreach ($data as $item) {
+            foreach ($item as $key => $value) {
+                if (is_array($value)) {
+                    $itemQueue[] = $this->convertArrayToXML($key, $value);
+                } else {
+                    $itemQueue[] = "<${key}>${value}</${key}>";
+                }
+            }
+        }
+
+        return "<${name}>" . implode($itemQueue) . "</${name}>";
+    }
+
     protected function convertIDPassToJson(string $idPassRes)
     {
         $res = array();
