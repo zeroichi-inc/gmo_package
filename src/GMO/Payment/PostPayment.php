@@ -74,10 +74,39 @@ class PostPayment extends Api
         // TODO: set delivery info
 
         //details
-
+        if ($this->apiType == self::API_IDPASS) {
+            if (count($details) > 1) {
+                $this->setParam('multiItem', $this->convertDetailsArrayToXML($details));
+            } else {
+                $detail = $details[0];
+                $keys = ['name', 'price', 'quantity', 'brand', 'category'];
+                foreach ($detail as $key => $value) {
+                    if (array_key_exists($key, $detail)) {
+                        $key[0] = strtoupper($key[0]);
+                        $this->setParam("detail${key}", $value);
+                    }
+                }
+            }
+        } else {
+            $this->setParam('details', $details);
+        }
 
         // TODO: set client fields
 
         return $this->request(self::METHOD_EXEC_TRAN_POSTPAY);
+    }
+
+    private function convertDetailsArrayToXML(array $details)
+    {
+        $detailItems = [];
+        foreach ($details as $detail) {
+            $properties = [];
+            foreach ($detail as $key => $value) {
+                $properties[] = "<${key}>${value}</${key}>";
+            }
+            $detailItems[] = "<detail>" . implode($properties) . "</detail>";
+        }
+
+        return base64_encode("<detailsInfo>" . implode($detailItems) . "</detailsInfo>");
     }
 }
