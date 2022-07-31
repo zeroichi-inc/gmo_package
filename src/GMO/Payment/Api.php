@@ -159,7 +159,7 @@ class Api
         return mb_convert_encoding(http_build_query($camelCaseParams), 'SJIS');
     }
 
-    protected convertArrayToXML(string $name, array $data)
+    protected function convertArrayToXML(string $name, array $data)
     {
         $itemQueue = [];
 
