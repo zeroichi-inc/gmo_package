@@ -85,12 +85,9 @@ class PostPayment extends Api
                 $this->setParam('multiItem', $this->convertDetailsArrayToXML($details));
             } else {
                 $detail = $details[0];
-                $keys = ['name', 'price', 'quantity', 'brand', 'category'];
                 foreach ($detail as $key => $value) {
-                    if (array_key_exists($key, $detail)) {
-                        $key[0] = strtoupper($key[0]);
-                        $this->setParam("detail${key}", $value);
-                    }
+                    $key[0] = strtoupper($key[0]);
+                    $this->setParam("detail${key}", $value);
                 }
             }
         } else {
