@@ -71,6 +71,12 @@ class PostPayment extends Api
 
         // TODO: set header info
 
+        // Customer info
+        foreach ($customerInfo as $key => $value) {
+            $key[0] = strtoupper($key[0]);
+            $this->setParam("customer${key}", $value);
+        }
+
         // TODO: set delivery info
 
         //details
