@@ -78,6 +78,10 @@ class PostPayment extends Api
         }
 
         // TODO: set delivery info
+        foreach ($deliveryInfo as $key => $value) {
+            $key[0] = strtoupper($key[0]);
+            $this->setParam("delivery${key}", $value);
+        }
 
         //details
         if ($this->apiType == self::API_IDPASS) {
