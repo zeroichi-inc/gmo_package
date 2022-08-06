@@ -37,8 +37,8 @@ class PostPayment extends Api
 
     private function setShopCredentials()
     {
-        $this->setParam('siteID', $this->siteID);
-        $this->setParam('sitePass', $this->sitePass);
+        $this->setParam('shopID', $this->shopID);
+        $this->setParam('shopPass', $this->shopPass);
     }
 
 
