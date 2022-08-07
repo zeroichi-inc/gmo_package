@@ -9,6 +9,7 @@ class PostPayment extends Api
     private const METHOD_ENTRY_TRAN_POSTPAY = 'EntryTranPostpay';
     private const METHOD_EXEC_TRAN_POSTPAY = 'ExecTranPostpay';
     private const METHOD_POSTPAY_INVOICE_DATA = 'PostpayInvoiceData';
+    private const METHOD_POSTPAY_SHIPPING = 'PostpayShipping';
 
 
     private string $siteID = "";
@@ -126,10 +127,22 @@ class PostPayment extends Api
         $this->setShopCredentials();
 
         $this->setParam('orderID', $orderID);
-
         $this->setParam('accessID', $accessInfo['id']);
         $this->setParam('accessPass', $accessInfo['pass']);
 
         return $this->request(self::METHOD_POSTPAY_INVOICE_DATA);
+    }
+
+    public function postpayShipping(string $orderID, array $accessInfo, $pdCompanyCode, $slipNumber)
+    {
+        $this->setShopCredentials();
+
+        $this->setParam('orderID', $orderID);
+        $this->setParam('accessID', $accessInfo['id']);
+        $this->setParam('accessPass', $accessInfo['pass']);
+        $this->setParam('pdCompanyCode', $pdCompanyCode);
+        $this->setParam('slipNo', $slipNumber);
+
+        return $this->request(self::METHOD_POSTPAY_SHIPPING);
     }
 }
