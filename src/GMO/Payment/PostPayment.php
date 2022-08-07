@@ -57,7 +57,8 @@ class PostPayment extends Api
 
     public function execTranPostpay(
         string $orderID,
-        array $accessInfo,
+        string $accessID,
+        string $accessPass,
         array $customerInfo,
         array $deliveryInfo,
         array $details,
@@ -67,8 +68,8 @@ class PostPayment extends Api
     {
         $this->setShopCredentials();
 
-        $this->setParam('accessID', $accessInfo['id']);
-        $this->setParam('accessPass', $accessInfo['pass']);
+        $this->setParam('accessID', $accessID);
+        $this->setParam('accessPass', $accessPass);
         $this->setParam('orderID', $orderID);
 
         // TODO: set header info
@@ -127,19 +128,19 @@ class PostPayment extends Api
         $this->setShopCredentials();
 
         $this->setParam('orderID', $orderID);
-        $this->setParam('accessID', $accessInfo['id']);
-        $this->setParam('accessPass', $accessInfo['pass']);
+        $this->setParam('accessID', $accessID);
+        $this->setParam('accessPass', $accessPass);
 
         return $this->request(self::METHOD_POSTPAY_INVOICE_DATA);
     }
 
-    public function postpayShipping(string $orderID, array $accessInfo, $pdCompanyCode, $slipNumber)
+    public function postpayShipping(string $orderID, string $accessID, string $accessPass, $pdCompanyCode, $slipNumber)
     {
         $this->setShopCredentials();
 
         $this->setParam('orderID', $orderID);
-        $this->setParam('accessID', $accessInfo['id']);
-        $this->setParam('accessPass', $accessInfo['pass']);
+        $this->setParam('accessID', $accessID);
+        $this->setParam('accessPass', $accessPass);
         $this->setParam('pdCompanyCode', $pdCompanyCode);
         $this->setParam('slipNo', $slipNumber);
 
