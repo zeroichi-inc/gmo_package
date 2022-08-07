@@ -8,6 +8,7 @@ class PostPayment extends Api
 {
     private const METHOD_ENTRY_TRAN_POSTPAY = 'EntryTranPostpay';
     private const METHOD_EXEC_TRAN_POSTPAY = 'ExecTranPostpay';
+    private const METHOD_POSTPAY_INVOICE_DATA = 'PostpayInvoiceData';
 
 
     private string $siteID = "";
@@ -118,5 +119,17 @@ class PostPayment extends Api
         }
 
         return base64_encode("<detailsInfo>" . implode($detailItems) . "</detailsInfo>");
+    }
+
+    public function postpayInvoiceData(string $orderID, array $accessInfo)
+    {
+        $this->setShopCredentials();
+
+        $this->setParam('orderID', $orderID);
+
+        $this->setParam('accessID', $accessInfo['id']);
+        $this->setParam('accessPass', $accessInfo['pass']);
+
+        return $this->request(self::METHOD_POSTPAY_INVOICE_DATA);
     }
 }
