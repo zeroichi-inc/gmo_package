@@ -123,7 +123,28 @@ class PostPayment extends Api
         return $this->request(self::METHOD_POSTPAY_SHIPPING);
     }
 
-    private function setPostpayOrderInfo()
+    public function postpayChange(
+        string $orderID,
+        string $accessID,
+        string $accessPass,
+        array $customerInfo,
+        array $deliveryInfo,
+        array $details
+    )
+    {
+        $this->setShopCredentials();
+
+        $this->setParam('accessID', $accessID);
+        $this->setParam('accessPass', $accessPass);
+        $this->setParam('orderID', $orderID);
+
+        // shared parameters with execTranPostpay
+        $this->setPostpayOrderInfo($customerInfo, $deliveryInfo, $details);
+
+        return $this->request(self::METHOD_EXEC_TRAN_POSTPAY);
+    }
+
+    private function setPostpayOrderInfo(array $customerInfo, array $deliveryInfo, array $details)
     {
         // Customer info
         foreach ($customerInfo as $key => $value) {
