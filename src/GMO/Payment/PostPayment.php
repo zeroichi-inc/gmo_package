@@ -11,6 +11,7 @@ class PostPayment extends Api
     private const METHOD_POSTPAY_INVOICE_DATA = 'PostpayInvoiceData';
     private const METHOD_POSTPAY_SHIPPING = 'PostpayShipping';
     private const METHOD_POSTPAY_CHANGE = 'PostpayChange';
+    private const METHOD_POSTPAY_CANCEL = 'PostpayCancel';
 
 
     private string $siteID = "";
@@ -173,5 +174,16 @@ class PostPayment extends Api
         } else {
             $this->setParam('details', $details);
         }
+    }
+
+    public function postpayCancel(string $orderID, string $accessID, string $accessPass)
+    {
+        $this->setShopCredentials();
+
+        $this->setParam('orderID', $orderID);
+        $this->setParam('accessID', $accessID);
+        $this->setParam('accessPass', $accessPass);
+
+        return $this->request(self::METHOD_POSTPAY_CANCEL);
     }
 }
