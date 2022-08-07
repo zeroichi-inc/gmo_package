@@ -141,7 +141,7 @@ class PostPayment extends Api
         // shared parameters with execTranPostpay
         $this->setPostpayOrderInfo($customerInfo, $deliveryInfo, $details);
 
-        return $this->request(self::METHOD_EXEC_TRAN_POSTPAY);
+        return $this->request(self::METHOD_POSTPAY_CHANGE);
     }
 
     private function setPostpayOrderInfo(array $customerInfo, array $deliveryInfo, array $details)
