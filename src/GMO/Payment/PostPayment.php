@@ -10,6 +10,7 @@ class PostPayment extends Api
     private const METHOD_EXEC_TRAN_POSTPAY = 'ExecTranPostpay';
     private const METHOD_POSTPAY_INVOICE_DATA = 'PostpayInvoiceData';
     private const METHOD_POSTPAY_SHIPPING = 'PostpayShipping';
+    private const METHOD_POSTPAY_CHANGE = 'PostpayChange';
 
 
     private string $siteID = "";
