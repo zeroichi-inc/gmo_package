@@ -74,32 +74,8 @@ class PostPayment extends Api
 
         // TODO: set header info
 
-        // Customer info
-        foreach ($customerInfo as $key => $value) {
-            $key[0] = strtoupper($key[0]);
-            $this->setParam("customer${key}", $value);
-        }
-
-        // TODO: set delivery info
-        foreach ($deliveryInfo as $key => $value) {
-            $key[0] = strtoupper($key[0]);
-            $this->setParam("delivery${key}", $value);
-        }
-
-        //details
-        if ($this->apiType == self::API_IDPASS) {
-            if (count($details) > 1) {
-                $this->setParam('multiItem', $this->convertDetailsArrayToXML($details));
-            } else {
-                $detail = $details[0];
-                foreach ($detail as $key => $value) {
-                    $key[0] = strtoupper($key[0]);
-                    $this->setParam("detail${key}", $value);
-                }
-            }
-        } else {
-            $this->setParam('details', $details);
-        }
+        // shared parameters with postpayChange
+        $this->setPostpayOrderInfo();
 
         // client fields
         for ($i = 1; $i <= min(count($clientFields), 3); $i++) {
@@ -145,5 +121,35 @@ class PostPayment extends Api
         $this->setParam('slipNo', $slipNumber);
 
         return $this->request(self::METHOD_POSTPAY_SHIPPING);
+    }
+
+    private function setPostpayOrderInfo()
+    {
+        // Customer info
+        foreach ($customerInfo as $key => $value) {
+            $key[0] = strtoupper($key[0]);
+            $this->setParam("customer${key}", $value);
+        }
+
+        // Delivery info
+        foreach ($deliveryInfo as $key => $value) {
+            $key[0] = strtoupper($key[0]);
+            $this->setParam("delivery${key}", $value);
+        }
+
+        // Details
+        if ($this->apiType == self::API_IDPASS) {
+            if (count($details) > 1) {
+                $this->setParam('multiItem', $this->convertDetailsArrayToXML($details));
+            } else {
+                $detail = $details[0];
+                foreach ($detail as $key => $value) {
+                    $key[0] = strtoupper($key[0]);
+                    $this->setParam("detail${key}", $value);
+                }
+            }
+        } else {
+            $this->setParam('details', $details);
+        }
     }
 }
