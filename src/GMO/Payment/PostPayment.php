@@ -75,7 +75,7 @@ class PostPayment extends Api
         // TODO: set header info
 
         // shared parameters with postpayChange
-        $this->setPostpayOrderInfo();
+        $this->setPostpayOrderInfo($customerInfo, $deliveryInfo, $details);
 
         // client fields
         for ($i = 1; $i <= min(count($clientFields), 3); $i++) {
