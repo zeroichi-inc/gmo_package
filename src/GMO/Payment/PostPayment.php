@@ -99,7 +99,7 @@ class PostPayment extends Api
         return base64_encode("<detailsInfo>" . implode($detailItems) . "</detailsInfo>");
     }
 
-    public function postpayInvoiceData(string $orderID, array $accessInfo)
+    public function postpayInvoiceData(string $orderID, string $accessID, string $accessPass)
     {
         $this->setShopCredentials();
 
