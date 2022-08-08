@@ -16,6 +16,7 @@ class PostPayment extends Api
     private const METHOD_POSTPAY_SHIPPING_CANCEL = 'PostpayShippingCancel';
     private const METHOD_POSTPAY_REISSUE_INVOICE = 'PostpayReissueInvoice';
     private const METHOD_SEARCH_TRADE_POSTPAY = 'SearchTradePostpay';
+    private const METHOD_POSTPAY_REDUCTION = 'PostpayReduction';
 
     private const REISSUE_DESTINATION_CURRENT = '1';
     private const REISSUE_DESTINATION_NEW = '2';
@@ -172,6 +173,11 @@ class PostPayment extends Api
             $this->setParam("delivery${key}", $value);
         }
 
+        $this->setDetails($details);
+    }
+
+    private function setDetails(array $details)
+    {
         // Details
         if ($this->apiType == self::API_IDPASS) {
             if (count($details) > 1) {
@@ -253,6 +259,22 @@ class PostPayment extends Api
         }
 
         return $this->request(self::METHOD_POSTPAY_REISSUE_INVOICE);
+    }
+
+    public function postpayReduction(string $orderID, string $accessID, string $accessPass, $amount, $tax = null, array $details)
+    {
+        $this->setShopCredentials();
+
+        $this->setParam('orderID', $orderID);
+        $this->setParam('accessID', $accessID);
+        $this->setParam('accessPass', $accessPass);
+
+        $this->setParam('amount', $amount);
+        if (!is_null($tax)) $this->setParam('tax', $tax);
+
+        $this->setDetails($details);
+
+        return $this->request(self::METHOD_POSTPAY_REDUCTION);
     }
 
     public function searchTradePostpay(string $orderID)
