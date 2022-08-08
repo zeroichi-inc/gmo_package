@@ -14,6 +14,15 @@ class PostPayment extends Api
     private const METHOD_POSTPAY_CANCEL = 'PostpayCancel';
     private const METHOD_POSTPAY_SHIPPING_CHANGE = 'PostpayShippingChange';
     private const METHOD_POSTPAY_SHIPPING_CANCEL = 'PostpayShippingCancel';
+    private const METHOD_POSTPAY_REISSUE_INVOICE = 'PostpayReissueInvoice';
+
+    private const REISSUE_DESTINATION_CURRENT = '1';
+    private const REISSUE_DESTINATION_NEW = '2';
+
+    private const REISSUE_REASON_LOST = '01';
+    private const REISSUE_REASON_NOT_RECEIVED = '02';
+    private const REISSUE_REASON_RELOCATION = '03';
+    private const REISSUE_REASON_OTHER = '99';
 
 
     private string $siteID = "";
@@ -211,5 +220,37 @@ class PostPayment extends Api
         $this->setParam('accessPass', $accessPass);
 
         return $this->request(self::METHOD_POSTPAY_SHIPPING_CANCEL);
+    }
+
+    public function postpayReissueInvoice(
+        string $orderID,
+        string $accessID,
+        string $accessPass,
+        string $destination,
+        string $reason,
+        string $reasonOther = null,
+        array $customerInfo = []
+    )
+    {
+        $this->setShopCredentials();
+
+        $this->setParam('orderID', $orderID);
+        $this->setParam('accessID', $accessID);
+        $this->setParam('accessPass', $accessPass);
+
+        $this->setParam('reasonCode', $reason);
+        if ($reason == self::REISSUE_REASON_OTHER) {
+            $this->setParam('otherReason', $reasonOther);
+        }
+
+        // Customer info
+        if ($destination == self::REISSUE_DESTINATION_NEW) {
+            foreach ($customerInfo as $key => $value) {
+                $key[0] = strtoupper($key[0]);
+                $this->setParam("customer${key}", $value);
+            }
+        }
+
+        return $this->request(self::METHOD_POSTPAY_REISSUE_INVOICE);
     }
 }
