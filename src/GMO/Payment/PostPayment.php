@@ -75,8 +75,8 @@ class PostPayment extends Api
         string $accessID,
         string $accessPass,
         array $customerInfo,
-        array $deliveryInfo,
         array $details,
+        array $deliveryInfo = [],
         array $httpHeaderInfo = [],
         array $clientFields = []
     )
