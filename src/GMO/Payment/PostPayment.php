@@ -59,13 +59,13 @@ class PostPayment extends Api
     }
 
 
-    public function entryTranPostpay(string $orderID, int $amount, int $tax = null)
+    public function entryTranPostpay(string $orderID, int $amount, int $tax)
     {
         $this->setShopCredentials();
 
         $this->setParam('orderID', $orderID);
         $this->setParam('amount', $amount);
-        if (!is_null($tax)) $this->setParam('tax', $jobCd);
+        if ($tax > 0) $this->setParam('tax', $jobCd);
 
         return $this->request(self::METHOD_ENTRY_TRAN_POSTPAY);
     }
@@ -261,7 +261,7 @@ class PostPayment extends Api
         return $this->request(self::METHOD_POSTPAY_REISSUE_INVOICE);
     }
 
-    public function postpayReduction(string $orderID, string $accessID, string $accessPass, $amount, $tax = null, array $details)
+    public function postpayReduction(string $orderID, string $accessID, string $accessPass, $amount, $tax, array $details)
     {
         $this->setShopCredentials();
 
@@ -270,7 +270,7 @@ class PostPayment extends Api
         $this->setParam('accessPass', $accessPass);
 
         $this->setParam('amount', $amount);
-        if (!is_null($tax)) $this->setParam('tax', $tax);
+        if ($tax > 0) $this->setParam('tax', $tax);
 
         $this->setDetails($details);
 
