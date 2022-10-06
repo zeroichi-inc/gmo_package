@@ -65,7 +65,7 @@ class PostPayment extends Api
 
         $this->setParam('orderID', $orderID);
         $this->setParam('amount', $amount);
-        if ($tax > 0) $this->setParam('tax', $jobCd);
+        if ($tax > 0) $this->setParam('tax', $tax);
 
         return $this->request(self::METHOD_ENTRY_TRAN_POSTPAY);
     }
