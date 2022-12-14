@@ -42,6 +42,20 @@ class PayPay extends Api
         int $paymentTermSec = 120
     )
     {
+        $this->setShopCredentials();
+
+        $this->setParam('accessID', $accessID);
+        $this->setParam('accessPass', $accessPass);
+        $this->setParam('orderID', $orderID);
+        $this->setParam('retURL', $retUrl);
+        $this->setParam('paymentTermSec', $paymentTermSec);
+
+        // client fields
+        for ($i = 1; $i <= min(count($clientFields), 3); $i++) {
+            $this->setParam("clientField${i}", $clientFields[$i - 1]);
+        }
+
+        return $this->request(self::METHOD_EXEC_TRAN_PAYPAY);
     }
 
     public function paypayStart(string $accessID, string $token)
