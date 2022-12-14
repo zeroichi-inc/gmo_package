@@ -35,4 +35,43 @@ class PayPay extends Api
             $this->shopPass = $credentials['shopPass'];
         }
     }
+
+    public function entryTranPaypay(string $orderID, int $amount, int $tax, string $jobCd = self::JOBCD_AUTH)
+    {
+    }
+
+    public function execTranPaypay(
+        string $orderID,
+        string $accessID,
+        string $accessPass,
+        string $retUrl,
+        array $clientFields = [],
+        int $paymentTermSec = 120
+    )
+    {
+    }
+
+    public function paypayStart(string $accessID, string $token)
+    {
+    }
+
+    public function paypaySales(
+        string $orderID,
+        string $accessID,
+        string $accessPass,
+        int $amount,
+        int $tax
+    )
+    {
+    }
+
+    public function paypayCancelReturn(
+        string $orderID,
+        string $accessID,
+        string $accessPass,
+        int $cancelAmount,
+        int $cancelTax
+    )
+    {
+    }
 }
