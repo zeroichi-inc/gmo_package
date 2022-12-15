@@ -95,5 +95,15 @@ class PayPay extends Api
         int $cancelTax
     )
     {
+        $this->setShopCredentials();
+
+        $this->setParam('accessID', $accessID);
+        $this->setParam('accessPass', $accessPass);
+        $this->setParam('orderID', $orderID);
+
+        $this->setParam('cancelAmount', $cancelAmount);
+        if ($cancelTax > 0) $this->setParam('cancelTax', $cancelTax);
+
+        return $this->request(self::METHOD_PAYPAY_CANCEL_RETURN);
     }
 }
