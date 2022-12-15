@@ -79,7 +79,7 @@ class Api
         }
     }
 
-    public function requestJson(string $apiMethod, bool $rawResponse)
+    public function requestJson(string $apiMethod, bool $rawResponse = false)
     {
         $methodUrl = $this->apiBaseUrl . '/' . $apiMethod . '.json';
 
@@ -111,7 +111,7 @@ class Api
         return $response;
     }
 
-    public function requestIdpass(string $apiMethod, bool $rawResponse)
+    public function requestIdpass(string $apiMethod, bool $rawResponse = false)
     {
         $methodUrl = $this->apiBaseUrl . '/' . $apiMethod . '.idPass';
 
