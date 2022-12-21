@@ -111,7 +111,7 @@ class Api
         return $response;
     }
 
-    public function requestIdpass(string $apiMethod, bool $rawResponse = false)
+    public function requestIdpass(string $apiMethod, bool $rawResponse = false, bool $convertToUTF8 = true)
     {
         $methodUrl = $this->apiBaseUrl . '/' . $apiMethod . '.idPass';
 
@@ -136,7 +136,9 @@ class Api
         }
 
         // Convert the response to utf-8
-        $curlres = mb_convert_encoding($curlres, 'UTF-8', 'SJIS');
+        if ($convertToUTF8) {
+            $curlres = mb_convert_encoding($curlres, 'UTF-8', 'SJIS');
+        }
 
         $response = array(
             'status' => $this->getIDPassResponseCode($curlres),

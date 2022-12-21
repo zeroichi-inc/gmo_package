@@ -64,7 +64,7 @@ class PayPay extends Api
         $this->setParam('token', $token);
 
         // This method does not support a JSON equivalent.
-        return $this->requestIdpass(self::METHOD_PAYPAY_START);
+        return $this->requestIdpass(self::METHOD_PAYPAY_START, true, false);
     }
 
     public function paypaySales(
