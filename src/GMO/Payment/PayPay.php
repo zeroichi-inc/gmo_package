@@ -12,6 +12,9 @@ class PayPay extends Api
     private const METHOD_PAYPAY_START = 'PaypayStart';
     private const METHOD_PAYPAY_SALES = 'PaypaySales';
     private const METHOD_PAYPAY_CANCEL_RETURN = 'PaypayCancelReturn';
+    private const METHOD_SEARCH_TRADE_MULTI = 'SearchTradeMulti';
+
+    private const PAYTYPE_PAYPAY = 45;
 
 
     public function __construct(string $host, array $credentials, bool $forceOldApi = false)
@@ -105,5 +108,15 @@ class PayPay extends Api
         if ($cancelTax > 0) $this->setParam('cancelTax', $cancelTax);
 
         return $this->request(self::METHOD_PAYPAY_CANCEL_RETURN);
+    }
+
+    public function searchTradeMulti(string $orderID)
+    {
+        $this->setShopCredentials();
+
+        $this->setParam('orderID', $orderID);
+        $this->setParam('payType', self::PAYTYPE_PAYPAY);
+
+        return $this->requestIdpass(self::METHOD_SEARCH_TRADE_MULTI);
     }
 }
