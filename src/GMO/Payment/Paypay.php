@@ -2,7 +2,7 @@
 
 namespace GMO\Payment;
 
-class PayPay extends Api
+class Paypay extends Api
 {
     use SetCredentials;
 
