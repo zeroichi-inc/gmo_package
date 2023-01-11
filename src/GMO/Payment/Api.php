@@ -165,7 +165,18 @@ class Api
     {
         $res = array();
 
-        parse_str($idPassRes, $parsedIdPassRes);
+        $parsedIdPassRes = [];
+        $param_list = explode('&', $idPassRes);
+        foreach ($param_list as $item) {
+            list($key, $value) = explode('=', $item);
+            if (str_ends_with($key, '[]')) {
+                $key = str_replace('[]', '', $key);
+                $parsedIdPassRes[$key][] = $value;
+            } else {
+                $parsedIdPassRes[$key] = $value;
+            }
+        }
+
 
         $isListOfArrays = true;
         $prevSize = NULL;
