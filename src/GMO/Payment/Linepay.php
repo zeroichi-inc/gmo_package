@@ -25,7 +25,7 @@ class Linepay extends Api
         $this->receiveCredentials($credentials);
     }
 
-    public function entryTranPaypay(string $orderID, int $amount, int $tax, string $jobCd = self::JOBCD_AUTH)
+    public function entryTranLinepay(string $orderID, int $amount, int $tax, string $jobCd = self::JOBCD_AUTH)
     {
         $this->setShopCredentials();
 
@@ -37,21 +37,21 @@ class Linepay extends Api
         return $this->request(self::METHOD_ENTRY_TRAN_LINEPAY);
     }
 
-    public function execTranPaypay(
+    public function execTranLinepay(
         string $orderID,
         string $accessID,
         string $accessPass,
         string $retURL,
         string $errorRcvURL,
         string $productName,
-        ?string $productImageUrl,
-        ?string $langCd,
-        ?string $userInfo,
-        ?string $returnUrl,
-        ?string $branchName,
-        ?string $branchID,
+        string $productImageUrl = null,
+        string $langCd = null,
+        string $userInfo = null,
+        string $returnUrl = null,
+        string $branchName = null,
+        string $branchID = null,
         array $clientFields = [],
-        bool $returnClientFlags = false,
+        bool $returnClientFlags = false
     )
     {
         $this->setShopCredentials();
@@ -86,8 +86,7 @@ class Linepay extends Api
         $this->setParam('accessID', $accessID);
         $this->setParam('token', $token);
 
-        // This method does not support a JSON equivalent.
-        return $this->request(self::METHOD_LINEPAY_START);
+        return $this->request(self::METHOD_LINEPAY_START, true);
     }
 
     public function linepaySales(
