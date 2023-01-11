@@ -86,7 +86,7 @@ class Linepay extends Api
         $this->setParam('accessID', $accessID);
         $this->setParam('token', $token);
 
-        return $this->request(self::METHOD_LINEPAY_START, true);
+        return $this->requestIdpass(self::METHOD_LINEPAY_START, true, false);
     }
 
     public function linepaySales(
