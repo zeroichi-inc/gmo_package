@@ -15,6 +15,13 @@ class ConvenienceStorePayment extends Api
     private const PAYTYPE_CONVENIENCE_STORE = 3;
 
 
+    public const CONVENIENCE_SEVEN_ELEVEN = 00007;
+    public const CONVENIENCE_LAWSON = 10001;
+    public const CONVENIENCE_FAMILY_MART = 10002;
+    public const CONVENIENCE_MINISTOP = 10005;
+    public const CONVENIENCE_SEIKO_MART = 10008;
+
+
     public function __construct(string $host, array $credentials, bool $forceOldApi = false)
     {
         parent::__construct($host, $this->apiType = $forceOldApi? self::API_IDPASS: self::API_JSON);
