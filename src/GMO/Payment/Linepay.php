@@ -25,7 +25,7 @@ class Linepay extends Api
         $this->receiveCredentials($credentials);
     }
 
-    public function entryTranLinepay(string $orderID, int $amount, int $tax, string $jobCd = self::JOBCD_AUTH)
+    public function entryTranLinepay(string $orderID, int $amount, int $tax = 0, string $jobCd = self::JOBCD_AUTH)
     {
         $this->setShopCredentials();
 
@@ -94,7 +94,7 @@ class Linepay extends Api
         string $accessID,
         string $accessPass,
         int $amount,
-        int $tax
+        int $tax = 0
     )
     {
         $this->setShopCredentials();
@@ -113,7 +113,7 @@ class Linepay extends Api
         string $accessID,
         string $accessPass,
         int $cancelAmount,
-        int $cancelTax
+        int $cancelTax = 0
     )
     {
         $this->setShopCredentials();
