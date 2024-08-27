@@ -362,4 +362,26 @@ class CreditCardPayment
 
         return $entries;
     }
+
+    public function tds2Auth(string $accessID, string $accessPass, string $tds2Param)
+    {
+        $api = $this->createApiObject();
+
+        $api->setParam('AccessID', $accessID);
+        $api->setParam('AccessPass', $accessPass);
+        $api->setParam('Tds2Param', $tds2Param);
+
+        return $api->request(Api::METHOD_TDS_2_AUTH);
+    }
+
+    public function tds2Result(string $accessID, string $accessPass)
+    {
+        $api = $this->createApiObject(false, false);
+
+        $api->setParam('accessID', $accessID);
+        $api->setParam('accessPass', $accessPass);
+
+        return $api->request(Api::METHOD_TDS_2_RESULT);
+    }
+
 }
