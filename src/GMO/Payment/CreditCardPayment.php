@@ -367,9 +367,9 @@ class CreditCardPayment
     {
         $api = $this->createApiObject();
 
-        $api->setParam('AccessID', $accessID);
-        $api->setParam('AccessPass', $accessPass);
-        $api->setParam('Tds2Param', $tds2Param);
+        $api->setParam('accessID', $accessID);
+        $api->setParam('accessPass', $accessPass);
+        $api->setParam('tds2Param', $tds2Param);
 
         return $api->request(Api::METHOD_TDS_2_AUTH);
     }
