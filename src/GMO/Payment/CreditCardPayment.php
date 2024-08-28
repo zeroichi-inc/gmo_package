@@ -295,7 +295,7 @@ class CreditCardPayment
 
     public function registerRecurringAccountTrans()
     {
-        throw Exception('Unimplemented');
+        throw new \Exception('Unimplemented');
     }
 
     public function unregisterRecurring(string $recurringID)
