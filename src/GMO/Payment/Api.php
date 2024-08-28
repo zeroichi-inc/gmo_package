@@ -20,6 +20,8 @@ class Api
     public const METHOD_SEARCH_CARD = 'SearchCard';
     public const METHOD_SEARCH_CARD_DETAIL = 'SearchCardDetail';
     public const METHOD_DELETE_CARD = 'DeleteCard';
+    public const METHOD_TDS_2_AUTH = 'Tds2Auth';
+    public const METHOD_TDS_2_RESULT = 'Tds2Result';
     // Recurring payments
     public const METHOD_REGISTER_RECURRING_CREDIT = 'RegisterRecurringCredit';
     public const METHOD_REGISTER_RECURRING_ACCOUNT_TRANS = 'RegisterRecurringAccountTrans';
