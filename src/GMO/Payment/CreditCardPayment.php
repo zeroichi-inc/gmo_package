@@ -235,7 +235,7 @@ class CreditCardPayment
     public function searchCardDetail(array $params)
     {
         $api = $this->createApiObject(
-            !array_key_exists('memberID') || array_key_exists('searchType', $params),
+            !array_key_exists('memberID', $params) || array_key_exists('searchType', $params),
             array_key_exists('memberID', $params)
         );
 
