@@ -81,7 +81,7 @@ class Api
         }
     }
 
-    public function requestJson(string $apiMethod, bool $rawResponse)
+    public function requestJson(string $apiMethod, bool $rawResponse = false)
     {
         $methodUrl = $this->apiBaseUrl . '/' . $apiMethod . '.json';
 
@@ -113,7 +113,7 @@ class Api
         return $response;
     }
 
-    public function requestIdpass(string $apiMethod, bool $rawResponse)
+    public function requestIdpass(string $apiMethod, bool $rawResponse = false, bool $convertToUTF8 = true)
     {
         $methodUrl = $this->apiBaseUrl . '/' . $apiMethod . '.idPass';
 
@@ -138,7 +138,9 @@ class Api
         }
 
         // Convert the response to utf-8
-        $curlres = mb_convert_encoding($curlres, 'UTF-8', 'SJIS');
+        if ($convertToUTF8) {
+            $curlres = mb_convert_encoding($curlres, 'UTF-8', 'SJIS');
+        }
 
         $response = array(
             'status' => $this->getIDPassResponseCode($curlres),
@@ -165,7 +167,18 @@ class Api
     {
         $res = array();
 
-        parse_str($idPassRes, $parsedIdPassRes);
+        $parsedIdPassRes = [];
+        $param_list = explode('&', $idPassRes);
+        foreach ($param_list as $item) {
+            list($key, $value) = explode('=', $item);
+            if (str_ends_with($key, '[]')) {
+                $key = str_replace('[]', '', $key);
+                $parsedIdPassRes[$key][] = $value;
+            } else {
+                $parsedIdPassRes[$key] = $value;
+            }
+        }
+
 
         $isListOfArrays = true;
         $prevSize = NULL;
