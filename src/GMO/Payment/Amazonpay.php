@@ -60,7 +60,7 @@ class Amazonpay extends Api
 
         // client fields
         for ($i = 1; $i <= min(count($clientFields), 3); $i++) {
-            $this->setParam("clientField${i}", $clientFields[$i - 1]);
+            $this->setParam("clientField{$i}", $clientFields[$i - 1]);
         }
 
         return $this->request(self::METHOD_EXEC_TRAN_AMAZONPAY);
