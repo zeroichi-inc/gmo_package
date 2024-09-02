@@ -106,6 +106,7 @@ class Amazonpay extends Api
 
         $this->setParam('accessID', $accessID);
         $this->setParam('accessPass', $accessPass);
+        $this->setParam('orderID', $orderID);
 
         $this->setParam('cancelAmount', $cancelAmount);
         if ($cancelTax > 0) $this->setParam('cancelTax', $cancelTax);
