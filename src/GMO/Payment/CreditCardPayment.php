@@ -158,7 +158,7 @@ class CreditCardPayment
         return $api->request(Api::METHOD_SEARCH_TRADE);
     }
 
-    public function saveMember(string $memberID, string $memberName = null)
+    public function saveMember(string $memberID, ?string $memberName = null)
     {
         $api = $this->createApiObject(false, true);
 
@@ -170,7 +170,7 @@ class CreditCardPayment
         return $api->request(Api::METHOD_SAVE_MEMBER);
     }
 
-    public function updateMember(string $memberID, string $memberName = null)
+    public function updateMember(string $memberID, ?string $memberName = null)
     {
         $api = $this->createApiObject(false, true);
 

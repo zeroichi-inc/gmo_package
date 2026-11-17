@@ -135,9 +135,9 @@ class Amazonpay extends Api
     }
 
     public function searchAddressAmazonPay(
-        string $orderID = null,
-        string $amazonCheckoutSessionID = null,
-        string $amazonBuyerToken = null,
+        ?string $orderID = null,
+        ?string $amazonCheckoutSessionID = null,
+        ?string $amazonBuyerToken = null,
     )
     {
         $this->setShopCredentials();

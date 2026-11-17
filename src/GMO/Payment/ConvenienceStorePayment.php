@@ -48,11 +48,11 @@ class ConvenienceStorePayment extends Api
         string $customerName,
         string $customerKana,
         string $telNo,
-        string $paymentTermDay = null,
-        string $mailAddress = null,
-        string $shopMailAddress = null,
-        string $reserveNo = null,
-        string $memberNo = null,
+        ?string $paymentTermDay = null,
+        ?string $mailAddress = null,
+        ?string $shopMailAddress = null,
+        ?string $reserveNo = null,
+        ?string $memberNo = null,
         array $registerDisp = [],
         array $receiptsDisp = [],
         array $clientFields = [],
@@ -76,17 +76,17 @@ class ConvenienceStorePayment extends Api
 
         // register fields
         for ($i = 1; $i <= min(count($registerDisp), 8); $i++) {
-            $this->setParam("registerDisp${i}", $registerDisp[$i - 1]);
+            $this->setParam("registerDisp{$i}", $registerDisp[$i - 1]);
         }
 
         // receipt fields
         for ($i = 1; $i <= min(count($receiptsDisp), 13); $i++) {
-            $this->setParam("receiptsDisp${i}", $receiptsDisp[$i - 1]);
+            $this->setParam("receiptsDisp{$i}", $receiptsDisp[$i - 1]);
         }
 
         // client fields
         for ($i = 1; $i <= min(count($clientFields), 3); $i++) {
-            $this->setParam("clientField${i}", $clientFields[$i - 1]);
+            $this->setParam("clientField{$i}", $clientFields[$i - 1]);
         }
         if ($clientFieldFlag) {
             $this->setParam('clientFieldFlag', 1);

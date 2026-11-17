@@ -98,7 +98,9 @@ class Api
 
         $curlres = curl_exec($ch);
         $curlinfo = curl_getinfo($ch);
-        curl_close($ch);
+        if (PHP_VERSION_ID < 80000) {
+            curl_close($ch); // No-op since PHP 8.0, deprecated in 8.5
+        }
 
         // In case cURL fails to connect
         if ($curlres === false) {
@@ -130,7 +132,9 @@ class Api
 
         $curlres = curl_exec($ch);
         $curlinfo = curl_getinfo($ch);
-        curl_close($ch);
+        if (PHP_VERSION_ID < 80000) {
+            curl_close($ch); // No-op since PHP 8.0, deprecated in 8.5
+        }
 
         // In case cURL fails to connect
         if ($curlres === false) {

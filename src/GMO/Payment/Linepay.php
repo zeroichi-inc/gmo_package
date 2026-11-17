@@ -44,12 +44,12 @@ class Linepay extends Api
         string $retURL,
         string $errorRcvURL,
         string $productName,
-        string $productImageUrl = null,
-        string $langCd = null,
-        string $userInfo = null,
-        string $returnUrl = null,
-        string $branchName = null,
-        string $branchID = null,
+        ?string $productImageUrl = null,
+        ?string $langCd = null,
+        ?string $userInfo = null,
+        ?string $returnUrl = null,
+        ?string $branchName = null,
+        ?string $branchID = null,
         array $clientFields = [],
         bool $returnClientFlags = false
     )
@@ -72,7 +72,7 @@ class Linepay extends Api
 
         // client fields
         for ($i = 1; $i <= min(count($clientFields), 3); $i++) {
-            $this->setParam("clientField${i}", $clientFields[$i - 1]);
+            $this->setParam("clientField{$i}", $clientFields[$i - 1]);
         }
         if ($returnClientFlags) {
             $this->setParam('clientFieldFlag', 1);

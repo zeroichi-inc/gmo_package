@@ -94,7 +94,7 @@ class PostPayment extends Api
 
         // client fields
         for ($i = 1; $i <= min(count($clientFields), 3); $i++) {
-            $this->setParam("clientField${i}", $clientFields[$i - 1]);
+            $this->setParam("clientField{$i}", $clientFields[$i - 1]);
         }
 
         return $this->request(self::METHOD_EXEC_TRAN_POSTPAY);
@@ -106,7 +106,7 @@ class PostPayment extends Api
         foreach ($details as $detail) {
             $properties = [];
             foreach ($detail as $key => $value) {
-                $properties[] = "<${key}>${value}</${key}>";
+                $properties[] = "<{$key}>{$value}</{$key}>";
             }
             $detailItems[] = "<detail>" . implode($properties) . "</detail>";
         }
@@ -164,13 +164,13 @@ class PostPayment extends Api
         // Customer info
         foreach ($customerInfo as $key => $value) {
             $key[0] = strtoupper($key[0]);
-            $this->setParam("customer${key}", $value);
+            $this->setParam("customer{$key}", $value);
         }
 
         // Delivery info
         foreach ($deliveryInfo as $key => $value) {
             $key[0] = strtoupper($key[0]);
-            $this->setParam("delivery${key}", $value);
+            $this->setParam("delivery{$key}", $value);
         }
 
         $this->setDetails($details);
@@ -186,7 +186,7 @@ class PostPayment extends Api
                 $detail = $details[0];
                 foreach ($detail as $key => $value) {
                     $key[0] = strtoupper($key[0]);
-                    $this->setParam("detail${key}", $value);
+                    $this->setParam("detail{$key}", $value);
                 }
             }
         } else {
@@ -235,7 +235,7 @@ class PostPayment extends Api
         string $accessPass,
         string $destination,
         string $reason,
-        string $reasonOther = null,
+        ?string $reasonOther = null,
         array $customerInfo = []
     )
     {
@@ -254,7 +254,7 @@ class PostPayment extends Api
         if ($destination == self::REISSUE_DESTINATION_NEW) {
             foreach ($customerInfo as $key => $value) {
                 $key[0] = strtoupper($key[0]);
-                $this->setParam("customer${key}", $value);
+                $this->setParam("customer{$key}", $value);
             }
         }
 
